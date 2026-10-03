@@ -1,0 +1,411 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Robbie Laughlen</title>
+<link rel="icon" href="/img/bear.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root { --bg: #e9edf0; --ink: #101316; --mute: #6b747c; --sign: #ffcd00; --board: #121519; --cell: #1d2228; --flap: #f2f2ee; --green: #45d483; --amber: #ffb02e; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: var(--bg); color: var(--ink); }
+  body { font: 15px/1.5 Inter, system-ui, sans-serif; }
+  a { color: inherit; }
+  .mono { font-family: "JetBrains Mono", monospace; }
+
+  .stagewrap { position: relative; height: 100svh; min-height: 560px; overflow: hidden; }
+  #stage { position: absolute; inset: 0; width: 100%; height: 100%; display: block; cursor: grab; touch-action: pan-y; }
+  #stage:active { cursor: grabbing; }
+
+  /* Wayfinding sign */
+  .sign { position: absolute; left: 20px; top: 20px; right: 20px; display: flex; align-items: stretch; background: var(--sign); color: #111; font-weight: 800; box-shadow: 0 12px 30px -16px rgba(0,0,0,.4); }
+  .sign .pict { background: #111; color: var(--sign); display: grid; place-items: center; width: 64px; font-size: 34px; }
+  .sign .txt { padding: 10px 16px; line-height: 1.05; }
+  .sign .txt b { display: block; font-size: clamp(22px, 3.2vw, 38px); letter-spacing: -.02em; }
+  .sign .txt small { font-weight: 500; font-size: 13px; opacity: .75; }
+  .sign nav { margin-left: auto; display: flex; align-items: center; gap: 2px; padding-right: 6px; flex-wrap: wrap; justify-content: flex-end; }
+  .sign nav a { text-decoration: none; padding: 6px 10px; font-weight: 700; font-size: 13px; }
+  .sign nav a:hover { background: #111; color: var(--sign); }
+
+  .hero-copy { position: absolute; left: 20px; bottom: 22px; max-width: 520px; }
+  .hero-copy h1 { margin: 0; font-size: clamp(46px, 7.5vw, 112px); line-height: .88; letter-spacing: -.055em; font-weight: 800; }
+  .hero-copy p { margin: 14px 0 0; color: #39424a; }
+  .hint { position: absolute; right: 20px; bottom: 22px; font-size: 12px; color: var(--mute); }
+
+  section { padding: 64px 20px; }
+  .wrap { max-width: 1180px; margin: 0 auto; }
+  .bar { display: flex; align-items: stretch; background: var(--sign); margin-bottom: 18px; }
+  .bar .pict { background: #111; color: var(--sign); width: 52px; display: grid; place-items: center; font-size: 26px; font-weight: 800; }
+  .bar h2 { margin: 0; padding: 8px 14px; font-size: clamp(22px, 3vw, 32px); letter-spacing: -.02em; font-weight: 800; }
+  .bar span { margin-left: auto; align-self: center; padding: 0 14px; font-size: 13px; font-weight: 600; }
+
+  /* Departures board */
+  .board { background: var(--board); color: var(--flap); padding: 14px; border-radius: 4px; box-shadow: inset 0 0 0 1px #000, 0 30px 60px -30px rgba(0,0,0,.6); overflow-x: auto; }
+  .board table { width: 100%; border-collapse: separate; border-spacing: 0 6px; min-width: 720px; }
+  .board th { text-align: left; font: 600 11px "JetBrains Mono", monospace; color: #8c96a0; letter-spacing: .12em; padding: 0 10px 4px; }
+  .board td { background: var(--cell); padding: 10px; vertical-align: top; font-family: "JetBrains Mono", monospace; font-size: 14px; }
+  .board td:first-child { border-radius: 3px 0 0 3px; }
+  .board td:last-child { border-radius: 0 3px 3px 0; }
+  .board tr:hover td { background: #262c34; }
+  .board a { text-decoration: none; font-weight: 600; text-transform: uppercase; }
+  .board a:hover { color: var(--sign); }
+  .board small { display: block; color: #9aa3ab; font-family: Inter, sans-serif; font-size: 12.5px; margin-top: 3px; text-transform: none; }
+  .flap { display: inline-block; white-space: pre; }
+  .st { font-weight: 600; }
+  .st.win { color: var(--green); }
+  .st.paper { color: var(--amber); }
+  .thumb { width: 54px; height: 40px; object-fit: cover; display: block; border-radius: 2px; filter: saturate(.7) contrast(1.05); }
+
+  /* Passenger info */
+  .info { display: grid; grid-template-columns: 1.3fr 1fr; gap: 28px; }
+  .info p { margin: 0; font-size: clamp(18px, 2vw, 23px); line-height: 1.38; letter-spacing: -.01em; }
+  .facts { display: grid; gap: 8px; }
+  .facts div { background: #fff; padding: 12px 14px; display: grid; grid-template-columns: 8.5em 1fr; gap: 10px; border-left: 4px solid var(--ink); }
+  .facts dt { font: 600 11px "JetBrains Mono", monospace; letter-spacing: .1em; text-transform: uppercase; color: var(--mute); padding-top: 3px; }
+  .facts dd { margin: 0; }
+
+  .legs { display: grid; gap: 12px; }
+  .leg { background: #fff; display: grid; grid-template-columns: 200px 1fr; }
+  .leg .when { background: var(--ink); color: #fff; padding: 16px; font: 600 13px "JetBrains Mono", monospace; }
+  .leg .when b { display: block; font: 800 26px Inter, sans-serif; letter-spacing: -.03em; color: var(--sign); margin-bottom: 4px; }
+  .leg .what { padding: 16px 18px; }
+  .leg h3 { margin: 0 0 6px; font-size: 18px; }
+  .leg ul { margin: 0; padding-left: 18px; }
+  .leg li { margin: 3px 0; }
+
+  /* Boarding pass */
+  .pass { display: grid; grid-template-columns: 1fr 260px; background: #fff; border-radius: 10px; overflow: hidden; box-shadow: 0 30px 60px -32px rgba(0,0,0,.45); }
+  .pass .main { padding: 26px; }
+  .pass .stub { padding: 26px; border-left: 2px dashed #c9cfd4; background: #f7f8f9; position: relative; }
+  .pass .stub::before, .pass .stub::after { content: ""; position: absolute; left: -13px; width: 24px; height: 24px; border-radius: 50%; background: var(--bg); }
+  .pass .stub::before { top: -12px; } .pass .stub::after { bottom: -12px; }
+  .route { display: flex; align-items: center; gap: 18px; margin: 10px 0 20px; }
+  .route b { font-size: clamp(40px, 6vw, 72px); letter-spacing: -.05em; line-height: 1; }
+  .route i { flex: 1; height: 2px; background: repeating-linear-gradient(90deg, var(--ink) 0 8px, transparent 8px 14px); }
+  .lbl { font: 600 10.5px "JetBrains Mono", monospace; letter-spacing: .12em; color: var(--mute); text-transform: uppercase; }
+  .email { font-size: clamp(22px, 3.4vw, 40px); font-weight: 800; letter-spacing: -.03em; text-decoration: none; display: inline-block; margin-top: 2px; }
+  .email:hover { background: var(--sign); }
+  .row { display: flex; gap: 28px; flex-wrap: wrap; margin-top: 20px; }
+  .stub a { display: block; font-weight: 700; text-decoration: none; padding: 6px 0; border-bottom: 1px solid #dde1e4; }
+  .stub a:hover { color: #000; background: var(--sign); }
+  .barcode { height: 54px; margin-top: 18px; background: repeating-linear-gradient(90deg, #111 0 2px, transparent 2px 4px, #111 4px 5px, transparent 5px 8px, #111 8px 11px, transparent 11px 12px); }
+  footer { text-align: center; color: var(--mute); font-size: 12px; padding: 0 0 40px; }
+
+  @media (max-width: 760px) {
+    .info, .pass, .leg { grid-template-columns: 1fr; }
+    .pass .stub { border-left: 0; border-top: 2px dashed #c9cfd4; }
+    .pass .stub::before, .pass .stub::after { display: none; }
+    .sign nav { display: none; }
+    .hint { display: none; }
+  }
+</style>
+<script type="importmap">
+{ "imports": {
+  "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
+  "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
+} }
+</script>
+</head>
+<body>
+<div class="stagewrap">
+  <canvas id="stage" aria-hidden="true"></canvas>
+  <div class="sign">
+    <div class="pict">✈</div>
+    <div class="txt"><b>Departures</b><small>Terminal RL · Gates 01–05</small></div>
+    <nav><a href="#info">Info</a><a href="#itinerary">Itinerary</a><a href="#departures">Projects</a><a href="#lounge">Music</a><a href="#pass">Contact</a></nav>
+  </div>
+  <div class="hero-copy"><h1 id="name"></h1><p id="tag"></p></div>
+  <div class="hint mono">Drag the case ↔</div>
+</div>
+
+<main id="content"></main>
+
+<script type="module">
+import { site } from "../data.js";
+const $ = (s) => document.querySelector(s);
+$("#name").innerHTML = site.name.replace(" ", "<br>");
+$("#tag").textContent = `${site.tagline}. Based in ${site.location}, available to fly anywhere.`;
+
+const status = (p) => (/winner/i.test(p.desc) ? ["WINNER", "win"] : p.href.endsWith(".pdf") ? ["PAPER", "paper"] : ["LANDED", ""]);
+const flight = (i) => `RL ${String(101 + i * 7)}`;
+const flap = (t) => `<span class="flap" data-text="${t}">${t}</span>`;
+
+$("#content").innerHTML = `
+<section id="info"><div class="wrap">
+  <div class="bar"><div class="pict">i</div><h2>Passenger information</h2><span>About</span></div>
+  <div class="info"><p>${site.about}</p>
+    <dl class="facts">${site.facts.map(([k, v]) => `<div><dt>${k}</dt><dd>${v}</dd></div>`).join("")}</dl></div>
+</div></section>
+
+<section id="itinerary"><div class="wrap">
+  <div class="bar"><div class="pict">→</div><h2>Itinerary</h2><span>Experience</span></div>
+  <div class="legs">${site.jobs.map((j) => `<div class="leg"><div class="when"><b>${j.code}</b>${j.when}</div>
+    <div class="what"><h3>${j.role}, ${j.org}</h3><ul>${j.points.map((p) => `<li>${p}</li>`).join("")}</ul></div></div>`).join("")}</div>
+</div></section>
+
+<section id="departures"><div class="wrap">
+  <div class="bar"><div class="pict">↗</div><h2>Departures</h2><span>Projects</span></div>
+  <div class="board"><table>
+    <thead><tr><th>TIME</th><th></th><th>FLIGHT</th><th>DESTINATION</th><th>VIA</th><th>STATUS</th></tr></thead>
+    <tbody>${site.projects.map((p, i) => { const [s, c] = status(p); return `<tr>
+      <td>${flap(p.year)}</td><td><img class="thumb" src="${p.img}" alt="" loading="lazy"></td><td>${flap(flight(i))}</td>
+      <td><a href="${p.href}" target="_blank" rel="noopener">${flap(p.title.toUpperCase())}</a><small>${p.desc}</small></td>
+      <td>${p.stack}</td><td class="st ${c}">${flap(s)}</td></tr>`; }).join("")}</tbody>
+  </table></div>
+  <div class="board" style="margin-top:14px"><table>
+    <thead><tr><th>YEAR</th><th>RECOGNITION</th></tr></thead>
+    <tbody>${site.awards.map(([y, a]) => `<tr><td style="width:90px">${flap(y)}</td><td>${a}</td></tr>`).join("")}</tbody>
+  </table></div>
+</div></section>
+
+<section id="lounge"><div class="wrap">
+  <div class="bar"><div class="pict">♪</div><h2>Lounge</h2><span>Music</span></div>
+  <div class="board"><table>
+    <thead><tr><th>YEAR</th><th></th><th>NOW PLAYING</th><th>STATUS</th></tr></thead>
+    <tbody>${site.music.map((m) => `<tr><td>${flap(m.year)}</td><td><img class="thumb" src="${m.img}" alt="" loading="lazy"></td>
+      <td><a href="${m.href}" target="_blank" rel="noopener">${flap(m.title.toUpperCase())}</a><small>${m.desc}</small></td><td class="st win">${flap("ON AIR")}</td></tr>`).join("")}</tbody>
+  </table></div>
+</div></section>
+
+<section id="pass"><div class="wrap">
+  <div class="bar"><div class="pict">✉</div><h2>Boarding pass</h2><span>Contact</span></div>
+  <div class="pass">
+    <div class="main">
+      <div class="lbl">Passenger</div><div style="font-weight:800;font-size:20px">${site.name.toUpperCase()}</div>
+      <div class="route"><b>YVR</b><i></i><b>YOU</b></div>
+      <div class="lbl">Contact</div>
+      <a class="email" href="mailto:${site.email}">${site.email}</a>
+      <div class="row"><div><div class="lbl">Class</div>Software / Physics / Sound</div><div><div class="lbl">Gate</div>Open</div><div><div class="lbl">Seat</div>Wherever needed</div></div>
+    </div>
+    <div class="stub">
+      <div class="lbl" style="margin-bottom:8px">Documents</div>
+      ${site.links.map(([l, h]) => `<a href="${h}" target="_blank" rel="noopener">${l} ↗</a>`).join("")}
+      <div class="barcode"></div>
+    </div>
+  </div>
+</div></section>
+<footer class="mono">© 2025 ${site.name} · Thank you for flying RL</footer>`;
+
+// Split-flap: rows settle left-to-right the first time they scroll into view.
+const glyphs = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+function settle(el) {
+  const final = el.dataset.text;
+  let frame = 0;
+  const id = setInterval(() => {
+    frame++;
+    el.textContent = [...final].map((ch, i) => (ch === " " || i < frame - 6 ? ch : glyphs[(Math.random() * glyphs.length) | 0])).join("");
+    if (frame - 6 >= final.length) { el.textContent = final; clearInterval(id); }
+  }, 38);
+}
+if (!reduce) {
+  const io = new IntersectionObserver((es) => es.forEach((e) => {
+    if (!e.isIntersecting) return;
+    io.unobserve(e.target);
+    e.target.querySelectorAll(".flap").forEach((f, i) => setTimeout(() => settle(f), i * 25));
+  }), { threshold: 0.2 });
+  document.querySelectorAll(".board").forEach((b) => io.observe(b));
+}
+
+// ---------------------------------------------------------------- scene
+import * as THREE from "three";
+import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
+import { RoundedBoxGeometry } from "three/addons/geometries/RoundedBoxGeometry.js";
+
+const canvas = $("#stage");
+const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
+renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.0;
+
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0xe9edf0);
+scene.fog = new THREE.Fog(0xe9edf0, 14, 40);
+const pmrem = new THREE.PMREMGenerator(renderer);
+scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.02).texture;
+const camera = new THREE.PerspectiveCamera(34, 1, 0.1, 200);
+
+const rnd = (a, b) => a + Math.random() * (b - a);
+function canvasTex(w, h, draw, rep = [1, 1]) {
+  const c = document.createElement("canvas");
+  c.width = w; c.height = h;
+  draw(c.getContext("2d"), w, h);
+  const t = new THREE.CanvasTexture(c);
+  t.colorSpace = THREE.SRGBColorSpace;
+  t.wrapS = t.wrapT = THREE.RepeatWrapping;
+  t.repeat.set(...rep);
+  t.anisotropy = 8;
+  return t;
+}
+
+// glossy terrazzo floor
+const terrazzo = canvasTex(1024, 1024, (g, w, h) => {
+  g.fillStyle = "#8f9aa6"; g.fillRect(0, 0, w, h);
+  for (let i = 0; i < 26000; i++) {
+    g.fillStyle = `hsl(${rnd(200, 220)}, ${rnd(5, 25)}%, ${rnd(30, 92)}%)`;
+    const s = rnd(1, 3.2);
+    g.fillRect(rnd(0, w), rnd(0, h), s, s);
+  }
+}, [10, 10]);
+const floor = new THREE.Mesh(new THREE.PlaneGeometry(80, 80), new THREE.MeshPhysicalMaterial({ map: terrazzo, roughness: 0.16, clearcoat: 1, clearcoatRoughness: 0.08 }));
+floor.rotation.x = -Math.PI / 2;
+scene.add(floor);
+
+// the view outside: dusk apron, runway lights
+const outside = canvasTex(2048, 512, (g, w, h) => {
+  const sky = g.createLinearGradient(0, 0, 0, h);
+  sky.addColorStop(0, "#2d4f78"); sky.addColorStop(0.55, "#5d7c9b"); sky.addColorStop(0.62, "#3c4a57"); sky.addColorStop(1, "#262d34");
+  g.fillStyle = sky; g.fillRect(0, 0, w, h);
+  // runway and taxiway light rows, receding
+  [[0.655, 9, 1.5], [0.69, 14, 2], [0.735, 22, 2.5], [0.79, 34, 3]].forEach(([y, gap, sz], k) => {
+    for (let x = rnd(0, gap); x < w; x += gap) {
+      g.fillStyle = k % 2 ? "rgba(255,196,110,.95)" : "rgba(225,238,255,.95)";
+      g.fillRect(x, y * h, sz, sz * 0.7);
+    }
+  });
+  // a tail fin, just about
+  g.fillStyle = "#e9eef3";
+  g.beginPath(); g.moveTo(1150, 330); g.lineTo(1230, 170); g.lineTo(1280, 170); g.lineTo(1250, 330); g.fill();
+  g.fillStyle = "#1f3a8a"; g.fillRect(1208, 215, 52, 14);
+});
+const view = new THREE.Mesh(new THREE.PlaneGeometry(60, 15), new THREE.MeshBasicMaterial({ map: outside, fog: false }));
+view.position.set(0, 7, -10);
+scene.add(view);
+
+// glass wall + mullions
+const glass = new THREE.Mesh(new THREE.PlaneGeometry(60, 14), new THREE.MeshPhysicalMaterial({ color: 0xdfe8ef, metalness: 0.2, roughness: 0.04, transparent: true, opacity: 0.28, envMapIntensity: 2.2 }));
+glass.position.set(0, 7, -6);
+scene.add(glass);
+const steel = new THREE.MeshStandardMaterial({ color: 0x2b3036, metalness: 0.7, roughness: 0.35 });
+const white = new THREE.MeshStandardMaterial({ color: 0xf2f4f5, roughness: 0.4 });
+for (let x = -24; x <= 24; x += 4.2) {
+  const m = new THREE.Mesh(new THREE.BoxGeometry(0.14, 14, 0.2), steel);
+  m.position.set(x, 7, -6);
+  scene.add(m);
+}
+for (const y of [0.35, 3.3, 7.6]) {
+  const m = new THREE.Mesh(new THREE.BoxGeometry(60, y < 1 ? 0.7 : 0.22, 0.3), y < 1 ? steel : white);
+  m.position.set(0, y, -5.95);
+  scene.add(m);
+}
+// handrail
+const rail = new THREE.Mesh(new THREE.CylinderGeometry(0.035, 0.035, 60, 12), new THREE.MeshStandardMaterial({ color: 0xd8dde2, metalness: 1, roughness: 0.15 }));
+rail.rotation.z = Math.PI / 2;
+rail.position.set(0, 0.95, -5.6);
+scene.add(rail);
+for (let x = -24; x <= 24; x += 2.1) {
+  const p = new THREE.Mesh(new THREE.CylinderGeometry(0.03, 0.03, 0.95, 8), rail.material);
+  p.position.set(x, 0.475, -5.6);
+  scene.add(p);
+}
+// roof trusses sweeping overhead
+for (let i = 0; i < 9; i++) {
+  const b = new THREE.Mesh(new THREE.BoxGeometry(0.25, 0.35, 30), white);
+  b.position.set(-16 + i * 4, 9.5, 2);
+  b.rotation.x = -0.32;
+  b.rotation.y = 0.5;
+  scene.add(b);
+}
+
+// --- the suitcase
+const shell = new THREE.MeshPhysicalMaterial({ color: 0xf09a00, roughness: 0.3, clearcoat: 1, clearcoatRoughness: 0.12 });
+const black = new THREE.MeshStandardMaterial({ color: 0x15171a, roughness: 0.6 });
+const chrome = new THREE.MeshStandardMaterial({ color: 0xd9dde1, metalness: 1, roughness: 0.18 });
+const caseG = new THREE.Group();
+const CW = 1.0, CH = 1.45, CD = 0.62, lift = 0.16;
+const body = new THREE.Mesh(new RoundedBoxGeometry(CW, CH, CD, 6, 0.09), shell);
+body.position.y = lift + CH / 2;
+caseG.add(body);
+// raised ribs on both faces
+for (const zs of [1, -1]) for (const x of [-0.3, -0.1, 0.1, 0.3]) {
+  const r = new THREE.Mesh(new RoundedBoxGeometry(0.07, CH - 0.24, 0.04, 2, 0.015), shell);
+  r.position.set(x, lift + CH / 2, zs * (CD / 2 + 0.005));
+  caseG.add(r);
+}
+// zip seam
+const seam = new THREE.Mesh(new RoundedBoxGeometry(CW + 0.012, CH + 0.012, 0.035, 6, 0.09), black);
+seam.position.y = lift + CH / 2;
+caseG.add(seam);
+// corner guards
+for (const sx of [-1, 1]) for (const sz of [-1, 1]) {
+  const c = new THREE.Mesh(new THREE.BoxGeometry(0.16, 0.12, 0.16), black);
+  c.position.set(sx * (CW / 2 - 0.06), lift + 0.07, sz * (CD / 2 - 0.06));
+  caseG.add(c);
+  const w = new THREE.Mesh(new THREE.CylinderGeometry(0.07, 0.07, 0.05, 20), black);
+  w.rotation.x = Math.PI / 2;
+  w.position.set(sx * (CW / 2 - 0.08), 0.07, sz * (CD / 2 - 0.08));
+  caseG.add(w);
+}
+// telescopic handle
+for (const x of [-0.2, 0.2]) {
+  const tube = new THREE.Mesh(new THREE.CylinderGeometry(0.018, 0.018, 0.85, 12), chrome);
+  tube.position.set(x, lift + CH + 0.42, -CD / 2 + 0.08);
+  caseG.add(tube);
+}
+const grip = new THREE.Mesh(new RoundedBoxGeometry(0.5, 0.06, 0.07, 3, 0.025), black);
+grip.position.set(0, lift + CH + 0.86, -CD / 2 + 0.08);
+caseG.add(grip);
+const tag = new THREE.Mesh(new THREE.BoxGeometry(0.14, 0.22, 0.01), new THREE.MeshStandardMaterial({ color: 0xff3b2f, roughness: 0.5 }));
+tag.position.set(CW / 2 + 0.02, lift + CH - 0.25, 0.1);
+tag.rotation.set(0.1, 0.2, 0.15);
+caseG.add(tag);
+caseG.position.set(1.15, 0, 0.6);
+scene.add(caseG);
+
+// contact shadow
+const blob = canvasTex(256, 256, (g) => {
+  const r = g.createRadialGradient(128, 128, 0, 128, 128, 128);
+  r.addColorStop(0, "rgba(0,0,0,.55)"); r.addColorStop(0.45, "rgba(0,0,0,.25)"); r.addColorStop(1, "rgba(0,0,0,0)");
+  g.fillStyle = r; g.fillRect(0, 0, 256, 256);
+});
+const shadow = new THREE.Mesh(new THREE.PlaneGeometry(2.1, 1.6), new THREE.MeshBasicMaterial({ map: blob, transparent: true, depthWrite: false }));
+shadow.rotation.x = -Math.PI / 2;
+shadow.position.set(1.15, 0.005, 0.6);
+scene.add(shadow);
+
+// mirrored case for a fake floor reflection
+const mirror = caseG.clone();
+mirror.scale.y = -1;
+mirror.traverse((m) => { if (m.isMesh) { m.material = m.material.clone(); m.material.transparent = true; m.material.opacity = 0.18; } });
+scene.add(mirror);
+
+const sunKey = new THREE.DirectionalLight(0xffffff, 1.4);
+sunKey.position.set(-3, 6, 5);
+scene.add(sunKey);
+
+// ---------------------------------------------------------------- loop
+function resize() {
+  const w = canvas.clientWidth, h = canvas.clientHeight;
+  renderer.setSize(w, h, false);
+  camera.aspect = w / h;
+  camera.updateProjectionMatrix();
+}
+new ResizeObserver(resize).observe(canvas);
+resize();
+
+// drag to spin, with inertia
+let yaw = -0.5, vel = 0.004, dragging = false, lastX = 0;
+canvas.addEventListener("pointerdown", (e) => { dragging = true; lastX = e.clientX; canvas.setPointerCapture(e.pointerId); });
+canvas.addEventListener("pointermove", (e) => { if (!dragging) return; vel = (e.clientX - lastX) * 0.006; lastX = e.clientX; });
+addEventListener("pointerup", () => { dragging = false; });
+
+const clock = new THREE.Clock();
+renderer.setAnimationLoop(() => {
+  const t = clock.getElapsedTime();
+  if (!dragging) vel += ((reduce ? 0 : 0.003) - vel) * 0.03;
+  yaw += vel;
+  caseG.rotation.y = yaw;
+  mirror.rotation.y = yaw;
+  mirror.position.copy(caseG.position);
+
+  const portrait = camera.aspect < 0.9;
+  const cx = portrait ? 1.15 : 0;
+  camera.position.set(cx + Math.sin(t * 0.15) * 0.2, 1.25, portrait ? 7.2 : 5.6);
+  camera.lookAt(portrait ? 1.15 : 0.15, 1.15, 0);
+  renderer.render(scene, camera);
+});
+</script>
+</body>
+</html>
