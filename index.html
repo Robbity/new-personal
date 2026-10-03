@@ -3,269 +3,210 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Robbie Laughlen</title>
-    <!-- Open Graph / Social Media Meta Tags -->
-    <meta property="og:title" content="Robbie Laughlen - Personal Portfolio" />
-    <meta property="og:description" content="Personal portfolio showcasing projects and music" />
+    <title>Robbie Laughlen — Software / Physics / Sound</title>
+    <meta name="description" content="Robbie Laughlen: computer science and physics graduate from UBC. Software, projects, résumé and music." />
+    <meta property="og:title" content="Robbie Laughlen" />
+    <meta property="og:description" content="Software, physics and sound. Résumé, projects and music." />
     <meta property="og:image" content="/img/initials_logo.png" />
     <meta property="og:url" content="https://robbielaughlen.com" />
     <meta property="og:type" content="website" />
-    <!-- Twitter Card Meta Tags -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Robbie Laughlen - Personal Portfolio" />
-    <meta name="twitter:description" content="Personal portfolio showcasing projects and music" />
-    <meta name="twitter:image" content="/img/initials_logo.png" />
     <link rel="stylesheet" href="style.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
-    />
-    <link rel=icon href=/img/bear.jpg sizes="16x16">
+    <link rel="icon" href="/img/bear.jpg" sizes="16x16" />
   </head>
   <body>
-    <header>
-      <div class="container header header-container">
-        <a href="/" class="logo">Robbie Laughlen</a>
-        <div class="social-links">
-          <a href="https://github.com/Robbity" title="GitHub" target="_blank"
-            ><i class="fab fa-github"></i
-          ></a>
-          <a
-            href="https://www.linkedin.com/in/robertlaughlen/"
-            title="LinkedIn"
-            target="_blank"
-            ><i class="fab fa-linkedin"></i
-          ></a>
-          <a href="mailto:robbie@laughlen.com" title="Email"
-            ><i class="fas fa-envelope"></i
-          ></a>
-          <div class="dropdown">
-            <i class="fas fa-file-alt" title="Resume"></i>
-            <div class="dropdown-content">
-              <a href="/data/Robert_Laughlen_CV.pdf" target="_blank">EU Curriculum Vitae</a>
-              <a href="/data/Robert_Laughlen_Resume.pdf" target="_blank">NA Résumé</a>
-            </div>
-          </div>
-        </div>
-      </div>
+    <header class="bar">
+      <a href="#top" class="mark">R.LAUGHLEN</a>
+      <nav>
+        <a href="#about">01 About</a>
+        <a href="#experience">02 Experience</a>
+        <a href="#projects">03 Projects</a>
+        <a href="#music">04 Music</a>
+        <a href="#contact">05 Contact</a>
+      </nav>
     </header>
-    <main class="container content">
-      <!-- <div class="experience">
-            <h2>Experience</h2>
-            <section id="experience">
- 
-                <article class="post">
-                    <h3>Project Assisant @ UBC</h3>
-                    <time dateTime="2024-01-01">Sept 2023 - Present</time>
-                    <p>Short description of your role and accomplishments at the company.</p>
-                </article>
 
-                <article class="post">
-                    <h3>XRF & VNIR Integration Co-op @ MineSense</h3>
-                    <time dateTime="2024-01-01">May 2022 - Jan 2023</time>
-                    <p>Short description of your role and accomplishments at the company.</p>
-                </article>
-
-            </section>
-        </div> -->
-
-      <div class="introduction">
-        <h2>About Me</h2>
-        <p>
-          Hi, I'm Robbie! Welcome to my home online. I'm a computer science and
-          physics graduate from the University of British Columbia (UBC) in
-          beautiful Vancouver. I'm passionate about software, creating, and
-          music. I especially love the magic that happens at the intersection of
-          things as that is often where value is created; music and physics,
-          coding and health, industry and environment etc. I'm
-          excited by our emerging AI world including the challenges to be
-          overcome. Here are a few things I've worked on. Hire me and help me
-          add more!
+    <main id="top">
+      <section class="hero">
+        <p class="label">PORTFOLIO / VANCOUVER, CA / 2025</p>
+        <h1>ROBBIE<br />LAUGHLEN</h1>
+        <p class="tagline">
+          Software. Physics. Sound.<br />
+          Building things where disciplines collide.
         </p>
-        <p>
-          Contact:
-          <a href="mailto:robbie@laughlen.com" title="Email"
-            >robbie@laughlen.com</a
-          >
-        </p>
-      </div>
-
-      <div class="projects">
-        <div class="tabs">
-          <button class="tab-button active" data-tab="projects">Technology</button>
-          <button class="tab-button" data-tab="music">Music</button>
+        <div class="hero-links">
+          <a class="btn" href="/data/Robert_Laughlen_Resume.pdf" target="_blank">Résumé (NA) ↓</a>
+          <a class="btn" href="/data/Robert_Laughlen_CV.pdf" target="_blank">CV (EU) ↓</a>
+          <a class="btn solid" href="mailto:robbie@laughlen.com">Get in touch →</a>
         </div>
-        
-        <section id="projects-tab" class="tab-content active">
-          <div class="posts">
-          <article class="post">
-            <a href="https://amazonpleaserecruit.me/" target="_blank">
-              <img src="/img/awsrecruit.jpg" alt="AWS Recruit" />
-              <h3>Amazon RECRUIT</h3>
-              <time datetime="2025-01-01">2025</time>
-              <p class="post-description">
-                Hiring platform with AI-driven interview question generation and applicant tracking
-              </p>
-            </a>
-          </article>
-          <article class="post">
-            <a
-              href="https://devpost.com/software/you-re-not-trash"
-              target="_blank"
-            >
-              <img src="/img/nottrash.jpg" alt="not trash" />
-              <h3>You're Not Trash! - StormHacks 2024 Sustainability Winner</h3>
-              <time datetime="2024-01-21">May 19, 2024</time>
-              <p class="post-description">
-                Recycling webgame created using React + Spline
-              </p>
-            </a>
-          </article>
+      </section>
 
-          <article class="post">
-            <a
-              href="https://devpost.com/software/yapyap-anonymous-social-journaling-app"
-              target="_blank"
-            >
-              <img src="/img/yapyap.jpg" alt="yapyap" />
-              <h3>yapyap - nwHacks 2024 Winner</h3>
-              <time datetime="2024-01-21">Jan 21, 2024</time>
-              <p class="post-description">
-                Anonymous Social Journaling App created using React Native
-              </p>
-            </a>
-          </article>
-
-          <article class="post">
-            <a
-              href="https://github.com/Robbity/MultibandCompressor"
-              target="_blank"
-            >
-              <img src="/img/multibandcomp.PNG" alt="Multiband Compressor" />
-              <h3>Multiband Compressor</h3>
-              <time datetime="2024-01-21">2024</time>
-              <p class="post-description">
-                Multiband Compressor VST created using Juce + C++
-              </p>
-            </a>
-          </article>
-
-          <article class="post">
-            <a href="https://github.com/Robbity/MusicRating" target="_blank">
-              <img
-                src="/img/ratingsplashscreen.png"
-                alt="Music Rating Application"
-              />
-              <h3>Music Rating Application</h3>
-              <time datetime="2024-01-21">2023</time>
-              <p class="post-description">
-                Created for CPSC210 using Java + Swing
-              </p>
-            </a>
-          </article>
-
-          <article class="post">
-            <a href="data/PHYS_319_Final_Paper.pdf" target="_blank">
-              <img src="/img/phys319.PNG" alt="minesense" />
-              <h3>Configurable Metronome with the MSP430</h3>
-              <time datetime="2024-01-21">2023</time>
-              <p class="post-description">
-                Created for PHYS319 using C + MSP430
-              </p>
-            </a>
-          </article>
-
-          <article class="post">
-            <a href="https://github.com/Robbity/SensorProgram" target="_blank">
-              <img src="/img/minesense.jpg" alt="Sensor Program" />
-              <h3>X-ray Detector Analytics Program</h3>
-              <time datetime="2024-01-21">2022</time>
-              <p class="post-description">
-                Created for MineSense using Python + Dash + Qt
-              </p>
-            </a>
-          </article>
-
-          <article class="post">
-            <a
-              href="https://github.com/SaadRehmanCS/DSCI_project"
-              target="_blank"
-            >
-              <img src="/img/heartfailure.PNG" alt="heart failure analysis" />
-              <h3>Heart Failure Risk Analysis</h3>
-              <time datetime="2024-01-21">2021</time>
-              <p class="post-description">Created for DSCI100 using R</p>
-            </a>
-          </article>
-
-          <article class="post">
-            <a href="/data/EPQ_Paper.pdf" target="_blank">
-              <img src="/img/epq.PNG" alt="guitar fourier analysis" />
-              <h3>FFT Analysis of Electric Guitar</h3>
-              <time datetime="2024-01-21">2019</time>
-              <p class="post-description">
-                Governor's Award Winning EPQ Project
-              </p>
-            </a>
-          </article>
+      <section id="about" class="block">
+        <h2><span>01</span> About</h2>
+        <div class="cols">
+          <p class="lead">
+            Computer science and physics graduate from the University of British
+            Columbia. Passionate about software, creating, and music.
+          </p>
+          <div>
+            <p>
+              The magic happens at the intersection of things, because that is
+              where value is created: music and physics, coding and health,
+              industry and environment. I'm excited by our emerging AI world,
+              including the challenges to be overcome.
+            </p>
+            <p>Hire me and help me add more to the list below.</p>
           </div>
-        </section>
-        
-        <section id="music-tab" class="tab-content">
-          <div class="posts">
-   
+        </div>
+        <dl class="specs">
+          <div><dt>Education</dt><dd>BSc Combined Computer Science &amp; Physics, UBC<br />Sept 2020 – Apr 2025<br />cGPA 3.73 / Dean's Honour List</dd></div>
+          <div><dt>Languages</dt><dd>Python, TypeScript, JavaScript, Go, C/C++, Java, R, HTML/CSS</dd></div>
+          <div><dt>Technologies</dt><dd>React, Node.js, Flask, Dash, Qt, Expo, TensorFlow, Maven, REST, AWS, Docker, Git</dd></div>
+          <div><dt>Citizenship</dt><dd>UK / Canada / Trinidad</dd></div>
+        </dl>
+      </section>
 
-            <article class="post">
-              <a href="https://youtu.be/RyHftWDR0yg?si=_dpyr7OprIgVeBOz" target="_blank">
-                <img src="/img/music/CornercutterVideo.jpg" alt="Cornercutter" />
-                <h3>Cornercutter - Video</h3>
-                <time datetime="2025-06-14">June 14, 2025</time>
-                <p class="post-description">
-                  Fun little video created for my song Cornercutter. Had the opportunity to improve my skills in Davinci Resolve and Touchdesigner.
-                </p>
-              </a>
-            </article>
+      <section id="experience" class="block">
+        <h2><span>02</span> Experience</h2>
 
-            <article class="post">
-              <a href="https://open.spotify.com/album/64emdZSbSDnZoPepjFSDfC?si=XO5DCu3cT5-UXEPRtqRXWA" target="_blank">
-                <img src="/img/music/Cornercutter.jpg" alt="Cornercutter" />
-                <h3>Cornercutter</h3>
-                <time datetime="2025-06-28">March 28, 2025</time>
-                <p class="post-description">
-                  A song I'm very proud of :). Created using Reaper, Serum, and my guitar!
-                </p>
-              </a>
-            </article>
-
-            <article class="post">
-              <a href="https://youtu.be/H-1TgKuGUe4?si=u9GEb8Soadf665Ag" target="_blank">
-                <img src="/img/music/shaft2live.jpg" alt="shaft2 live" />
-                <h3>shaft2 - live @ takeurtimeback</h3>
-                <time datetime="2025-06-16">March 16, 2025</time>
-                <p class="post-description">
-                  Charity perfomance raising funds for the PCRF. First time working out all the details of a live rehearsed perfomance with Reaper.
-                </p>
-              </a>
-            </article>
-
+        <article class="job">
+          <div class="meta">
+            <time>May 2024 – Jan 2025</time>
+            <span>Vancouver</span>
           </div>
-        </section>
-      </div>
-      
-      <script>
-        document.querySelectorAll('.tab-button').forEach(button => {
-          button.addEventListener('click', () => {
-            // Remove active class from all buttons and content
-            document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
-            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
-            
-            // Add active class to clicked button and corresponding content
-            button.classList.add('active');
-            const tabId = button.getAttribute('data-tab') + '-tab';
-            document.getElementById(tabId).classList.add('active');
-          });
-        });
-      </script>
+          <div>
+            <h3>Fullstack Developer Intern — 3DQue</h3>
+            <ul>
+              <li>Led UI component redesign using React and Tailwind CSS, creating an introductory tagging system that aided users in 3D print categorization.</li>
+              <li>Optimized API response times by rewriting critical endpoints in Go for better concurrency, cutting response times by 43% (1.4s → 0.8s).</li>
+              <li>Developed the Direct2Print system, integrating with Shopify and Etsy to increase user acquisition and streamline order processing.</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="job">
+          <div class="meta">
+            <time>May 2022 – Jan 2023</time>
+            <span>Vancouver</span>
+          </div>
+          <div>
+            <h3>XRF &amp; VNIR Integration Co-op — MineSense</h3>
+            <ul>
+              <li>Advanced sensor research for ShovelSense, a mining solution integrating high-speed XRF sensors on mobile equipment for real-time ore body analysis.</li>
+              <li>Developed software to interface with X-ray detector hardware and output metrics, reducing average XRF sensor testing time by over 50%.</li>
+            </ul>
+          </div>
+        </article>
+
+        <h3 class="sub">Recognition</h3>
+        <ul class="ledger">
+          <li><time>2024</time> AI in Software Development Certificate — DeepLearning.AI</li>
+          <li><time>2024</time> Sustainability Track Winner — StormHacks</li>
+          <li><time>2024</time> Best Design, Community Track Winner — nwHacks</li>
+          <li><time>2023</time> Research Grant — Google Vulnerability / LLM bugSWAT</li>
+          <li><time>2022</time> Best Music (x2) — UBC Game Developer Awards</li>
+          <li><time>2019</time> Governor's Award — EPQ Project</li>
+        </ul>
+      </section>
+
+      <section id="projects" class="block">
+        <h2><span>03</span> Projects</h2>
+        <div class="grid">
+          <a class="card" href="https://amazonpleaserecruit.me/" target="_blank">
+            <img src="/img/awsrecruit.jpg" alt="Amazon RECRUIT" loading="lazy" />
+            <div><time>2025</time><h3>Amazon RECRUIT</h3>
+            <p>Hiring platform with AI-driven interview question generation and applicant tracking.</p>
+            <small>React / Node / Postgres / Docker / OpenAI</small></div>
+          </a>
+          <a class="card" href="https://devpost.com/software/you-re-not-trash" target="_blank">
+            <img src="/img/nottrash.jpg" alt="You're Not Trash" loading="lazy" />
+            <div><time>May 2024</time><h3>You're Not Trash!</h3>
+            <p>Recycling web game. StormHacks 2024 Sustainability Winner.</p>
+            <small>React / Spline</small></div>
+          </a>
+          <a class="card" href="https://devpost.com/software/yapyap-anonymous-social-journaling-app" target="_blank">
+            <img src="/img/yapyap.jpg" alt="yapyap" loading="lazy" />
+            <div><time>Jan 2024</time><h3>yapyap</h3>
+            <p>Anonymous social journaling app with RNN emotion analysis. nwHacks 2024 Winner.</p>
+            <small>React Native / TensorFlow / AWS / MongoDB</small></div>
+          </a>
+          <a class="card" href="https://github.com/Robbity/MultibandCompressor" target="_blank">
+            <img src="/img/multibandcomp.PNG" alt="Multiband Compressor" loading="lazy" />
+            <div><time>2024</time><h3>Multiband Compressor</h3>
+            <p>Multiband compressor audio plugin (VST).</p>
+            <small>C++ / JUCE</small></div>
+          </a>
+          <a class="card" href="https://github.com/Robbity/MusicRating" target="_blank">
+            <img src="/img/ratingsplashscreen.png" alt="Music Rating Application" loading="lazy" />
+            <div><time>2023</time><h3>Music Rating Application</h3>
+            <p>Created for CPSC 210.</p>
+            <small>Java / Swing</small></div>
+          </a>
+          <a class="card" href="/data/PHYS_319_Final_Paper.pdf" target="_blank">
+            <img src="/img/phys319.PNG" alt="MSP430 Metronome" loading="lazy" />
+            <div><time>2023</time><h3>Configurable Metronome</h3>
+            <p>Created for PHYS 319. Paper available.</p>
+            <small>C / MSP430</small></div>
+          </a>
+          <a class="card" href="https://github.com/Robbity/SensorProgram" target="_blank">
+            <img src="/img/minesense.jpg" alt="Sensor Program" loading="lazy" />
+            <div><time>2022</time><h3>X-ray Detector Analytics</h3>
+            <p>Real-time metrics and live graphing for a Ketek VIAMP H50 detector, for MineSense.</p>
+            <small>Python / Dash / Qt / Linux</small></div>
+          </a>
+          <a class="card" href="https://github.com/SaadRehmanCS/DSCI_project" target="_blank">
+            <img src="/img/heartfailure.PNG" alt="Heart failure analysis" loading="lazy" />
+            <div><time>2021</time><h3>Heart Failure Risk Analysis</h3>
+            <p>Created for DSCI 100.</p>
+            <small>R</small></div>
+          </a>
+          <a class="card" href="/data/EPQ_Paper.pdf" target="_blank">
+            <img src="/img/epq.PNG" alt="Guitar Fourier analysis" loading="lazy" />
+            <div><time>2019</time><h3>FFT Analysis of Electric Guitar</h3>
+            <p>Governor's Award winning EPQ project. Paper available.</p>
+            <small>Physics / Signal analysis</small></div>
+          </a>
+        </div>
+      </section>
+
+      <section id="music" class="block">
+        <h2><span>04</span> Music</h2>
+        <p class="lead">Audio production, sound design, songwriting and synthesis. Raised thousands for charity through music and sport events.</p>
+        <div class="grid">
+          <a class="card" href="https://youtu.be/RyHftWDR0yg" target="_blank">
+            <img src="/img/music/CornercutterVideo.jpg" alt="Cornercutter video" loading="lazy" />
+            <div><time>Jun 2025</time><h3>Cornercutter — Video</h3>
+            <p>Video for my song Cornercutter, built in DaVinci Resolve and TouchDesigner.</p></div>
+          </a>
+          <a class="card" href="https://open.spotify.com/album/64emdZSbSDnZoPepjFSDfC" target="_blank">
+            <img src="/img/music/Cornercutter.jpg" alt="Cornercutter" loading="lazy" />
+            <div><time>Mar 2025</time><h3>Cornercutter</h3>
+            <p>A song I'm very proud of. Made with Reaper, Serum and guitar.</p></div>
+          </a>
+          <a class="card" href="https://youtu.be/H-1TgKuGUe4" target="_blank">
+            <img src="/img/music/shaft2live.jpg" alt="shaft2 live" loading="lazy" />
+            <div><time>Mar 2025</time><h3>shaft2 — live @ takeurtimeback</h3>
+            <p>Charity performance raising funds for the PCRF. First fully rehearsed live set run from Reaper.</p></div>
+          </a>
+        </div>
+      </section>
+
+      <section id="contact" class="block contact">
+        <h2><span>05</span> Contact</h2>
+        <a class="big" href="mailto:robbie@laughlen.com">robbie@laughlen.com</a>
+        <ul class="links">
+          <li><a href="https://github.com/Robbity" target="_blank">GitHub ↗</a></li>
+          <li><a href="https://www.linkedin.com/in/robertlaughlen/" target="_blank">LinkedIn ↗</a></li>
+          <li><a href="/data/Robert_Laughlen_Resume.pdf" target="_blank">Résumé ↓</a></li>
+          <li><a href="/data/Robert_Laughlen_CV.pdf" target="_blank">CV ↓</a></li>
+        </ul>
+        <p class="interests">Also: intramural volleyball captain / certified cycling coach / 27+ countries visited / game jams</p>
+      </section>
     </main>
+
+    <footer class="bar">
+      <span>© 2025 Robbie Laughlen</span>
+      <a href="#top">Back to top ↑</a>
+    </footer>
   </body>
 </html>
