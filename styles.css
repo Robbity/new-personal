@@ -28,8 +28,7 @@ h2 { margin: 0; font-size: clamp(30px, 4vw, 48px); font-weight: 800; letter-spac
 .job { display: grid; grid-template-columns: 220px 1fr; gap: 24px; padding: 24px 0; border-top: 1px solid var(--line); }
 .job .meta { color: var(--mute); line-height: 1.6; }
 .job h3 { margin: 0 0 10px; font-size: 21px; font-weight: 600; letter-spacing: -.02em; }
-.job ul { margin: 0; padding-left: 18px; max-width: 70ch; }
-.job li { margin: 6px 0; }
+.job p { margin: 0; max-width: 68ch; }
 
 .awards { columns: 2; gap: 32px; padding: 0; margin: 0; list-style: none; }
 .awards li { break-inside: avoid; padding: 10px 0; border-bottom: 1px solid var(--line); display: grid; grid-template-columns: 5.5em 1fr; gap: 12px; }
