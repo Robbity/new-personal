@@ -3,10 +3,15 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Robbie Laughlen</title>
+<title>Robbie Laughlen — Software Engineer, London</title>
+<meta name="description" content="Robbie Laughlen: software engineer at Solirius Reply in London. Experience, recognition and CV.">
+<meta property="og:title" content="Robbie Laughlen — Software Engineer">
+<meta property="og:description" content="Software engineer in London. Experience, recognition and CV.">
+<meta property="og:image" content="/img/initials_logo.png">
 <link rel="icon" href="/img/bear.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 <script type="importmap">
 { "imports": {
@@ -20,19 +25,93 @@
 
 <header class="hero">
   <div class="top mono">
-    <span>RL&nbsp;—&nbsp;CAT. NO. 001</span>
-    <nav><a href="#notes">Liner notes</a><a href="#credits">Credits</a><a href="#sheet">Contact sheet</a><a href="#tracks">Tracklist</a><a href="#contact">Contact</a></nav>
+    <span>RL</span>
+    <nav aria-label="Main"><a href="#experience">Experience</a><a href="#recognition">Recognition</a><a href="#cv">CV</a></nav>
   </div>
   <div></div>
   <div>
-    <div class="title"><h1 id="name"></h1></div>
-    <div class="bottom mono"><span id="tag"></span><span>Scroll ↓</span></div>
+    <h1>Robbie<br>Laughlen</h1>
+    <div class="bottom mono">
+      <span>Software Engineer, Solirius Reply — London, UK</span>
+      <span class="scroll" aria-hidden="true">Scroll ↓</span>
+    </div>
   </div>
 </header>
 
-<main id="content"></main>
+<main>
+  <section id="experience" aria-labelledby="experience-h"><div class="wrap">
+    <div class="head"><h2 id="experience-h">Experience</h2><span class="mono">2022 — Now</span></div>
 
-<script type="module" src="js/content.js"></script>
-<script type="module" src="js/disc.js"></script>
+    <article class="job">
+      <div class="mono meta">Jan 2026 — Present<br>London, UK</div>
+      <div>
+        <h3>Software Engineer, Solirius Reply</h3>
+        <ul>
+          <li>Developing C#/.NET backend services for Homes England's digitalisation of the £24.7 billion Help to Buy loan portfolio.</li>
+          <li>Contributing to alpha-stage development and testing in Azure DevOps, including preparation for a UK Government Digital Service assessment.</li>
+          <li>Organised an AI-assisted engineering hackathon for 20+ participants, using Microsoft Copilot to prototype solutions within the project's .NET architecture.</li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="job">
+      <div class="mono meta">May 2024 — Dec 2024<br>Vancouver, Canada</div>
+      <div>
+        <h3>Full-Stack Software Engineer, 3DQue</h3>
+        <ul>
+          <li>Refactored React/Tailwind components and built a tagging system for 3D-print jobs, reducing item-location time by 40%.</li>
+          <li>Re-engineered Go API endpoints for concurrency, cutting response times by 43% (1.4s → 0.8s).</li>
+          <li>Developed Direct2Print integrations connecting Shopify and Etsy orders to automated 3D-print workflows.</li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="job">
+      <div class="mono meta">May 2022 — Jan 2023<br>Vancouver, Canada</div>
+      <div>
+        <h3>Software Engineer, MineSense</h3>
+        <ul>
+          <li>Developed Python data-capture and diagnostics tools for ShovelSense R&amp;D, improving real-time telemetry quality by 37%.</li>
+          <li>Built software interfacing with XRF detector hardware, cutting sensor test time by over 50% and doubling bench throughput.</li>
+          <li>Introduced CI/CD pipelines for deployment and vulnerability detection, identifying 10+ issues per week.</li>
+        </ul>
+      </div>
+    </article>
+  </div></section>
+
+  <section id="recognition" aria-labelledby="recognition-h"><div class="wrap">
+    <div class="head"><h2 id="recognition-h">Recognition</h2><span class="mono">BSc CS &amp; Physics, UBC — First-Class Honours</span></div>
+    <ul class="awards">
+      <li><span class="mono">2025</span>IBM RAG and Agentic AI Professional Certificate</li>
+      <li><span class="mono">2024</span>AI in Software Development Certificate, DeepLearning.AI</li>
+      <li><span class="mono">2024</span>Best Design &amp; Community Track Winner, nwHacks</li>
+      <li><span class="mono">2024</span>Sustainability Track Winner, StormHacks</li>
+      <li><span class="mono">2023</span>Research Grant, Google Vulnerability / LLM bugSWAT</li>
+      <li><span class="mono">2020–25</span>Dean's Honour List, University of British Columbia</li>
+    </ul>
+  </div></section>
+
+  <section id="cv" class="contact" aria-labelledby="cv-h"><div class="wrap">
+    <div class="head"><h2 id="cv-h">CV</h2><span class="mono">PDF</span></div>
+    <div class="cvs">
+      <a href="/data/Robert_Laughlen_CV.pdf"><span class="mono">UK / Europe</span>Download CV ↓</a>
+      <a href="/data/Robert_Laughlen_Resume.pdf"><span class="mono">North America</span>Download résumé ↓</a>
+    </div>
+    <a class="email" href="mailto:robbie@laughlen.com">robbie@laughlen.com</a>
+    <div class="links mono">
+      <a href="https://www.linkedin.com/in/robertlaughlen/">LinkedIn ↗</a>
+      <a href="https://github.com/Robbity">GitHub ↗</a>
+    </div>
+    <footer class="mono"><span>© 2026 Robbie Laughlen</span><a href="#">Top ↑</a></footer>
+  </div></section>
+</main>
+
+<script type="module">
+import { mountDisc } from "./js/disc.js";
+const disc = mountDisc(document.querySelector("#stage"), { background: "#f3f3f1" });
+const place = () => Object.assign(disc.pose, { y: innerWidth < 760 ? 0.12 : 0.05, scale: innerWidth < 760 ? 0.95 : 0.85 });
+place();
+addEventListener("resize", place);
+</script>
 </body>
 </html>
